@@ -1,0 +1,24 @@
+1.在TouTiao.vue设置字体图标 在App.vue传参 
+
+2.下载vant组件 引入全局
+3.
+rem适配？
+1-1.跟标签的font-size根据屏幕宽度动态设置
+1-2样式里的单位 px全部换成rem
+在.postcssrc.js适配
+rem适配 下载 npm i amfe-flexible( REM 基准值html 标签的字体大小）) 在引入import 'amfe-flexible'
+  将 px 转为 rem下载:yarn add postcss-pxtorem@5.1.1 -D
+4.下载axios yarn add axios 在utils里面引入
+5.配置路由
+5-1 直接引入
+配置路由第一个直接引入的 用户只能同时看一个界面-->只把用户当前访问的界面返回给用户
+相当于如果1000个界面(有可能第一个加载文件的时候就会很慢)
+5-2 懒加载
+直接component: () => import("@/views/Login/index.vue"), 路由的懒加载
+访问到某一个路由的时候再去加载当前路由文件
+6.设置主题颜色 vue.config.js 并且在main.js里面设置为less
+7.设置登录按钮 在Login里面
+8.请求axios数据 在api 写上地址 await后面写的是promise
+只有promise成功了之后的情况下才可以往下进行
+8-1 promise解决了回调地狱--链式调用形式--每次.then就会生成新的promise
+8-2 await 链式调用
