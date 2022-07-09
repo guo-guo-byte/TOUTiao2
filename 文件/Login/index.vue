@@ -1,12 +1,6 @@
 <template>
   <div class="login-container">
-    <van-nav-bar title="登录">
-      <!-- 返回上一级路由 -->
-      <!-- @click.navitick="$router.back() -->
-      <template #left>
-        <van-icon name="cross" @click="btn" />
-      </template>
-    </van-nav-bar>
+    <van-nav-bar title="登录" />
     <!-- 6.ref拿到表单 -->
     <van-form @submit="onSubmit" ref="form">
       <van-field
@@ -33,7 +27,7 @@
         <!--5.type  maxlength 是限制只能输入是数字 最大能输入6位-->
         <!-- 1。利用插槽定义字体图标  left-icon	自定义输入框头部图标 就要放在上template-->
         <template #left-icon> <TouTiao icon="yanzhengma" /> </template>
-        <!--2.验证码button插槽 native-type="button"设置不跳转  -->
+        <!--2.验证码 native-type="button"设置不跳转  -->
         <template #button>
           <!-- 7.倒计时一开始 先展示获取验证的按钮，倒计时隐藏 点击按钮的时候 倒计时展示，并通过@finish="isShowCountDown = false"在让按钮显示 -->
           <van-count-down
@@ -84,7 +78,7 @@ export default {
             // 是否为必选字段
             required: true,
             // 校验规则如果不满足的提示消息
-            message: "请输入手机号", //这个是vant文档里面有message->button
+            message: "请输入手机号",
           },
           {
             // \d是数字的意思
@@ -108,9 +102,6 @@ export default {
 
   // 3。发送请求
   methods: {
-    btn() {
-      this.$router.push("/my");
-    },
     // 点击提交表单
     async onSubmit() {
       // 第一种写法 直接传参数
@@ -122,16 +113,9 @@ export default {
       try {
         const res = await login(this.user);
         console.log(res);
-        //10 利用vuex把用户名，密码存到本地存储
-        this.$store.commit("setUser", res.data.data);
-        // console.log(this.$store); 原型上面有一个store
-        console.log(res.data.data);
         Toast.success("登录成功");
-        // 11.跳转首页
-        this.$router.push("/");
       } catch (error) {
         // ？号是代表&&的意思 检验是否都为真
-        console.log(error);
         Toast.fail(error?.resoonse?.data?.message || "服务端错误");
       }
     },
@@ -147,7 +131,7 @@ export default {
       }
       try {
         // await this.$refs.form.validate("mobile");
-        // 9.校验手机格式=》按钮禁用-》发送请求-》拿到结果-》接触禁用
+        // 9.按钮禁用-》发送请求-》拿到结果-》接触禁用
         this.isDisabled = true;
         // 8.把mobile手机号发到后台
         await getSnsCode(this.user.mobile);

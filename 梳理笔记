@@ -22,3 +22,14 @@ rem适配 下载 npm i amfe-flexible( REM 基准值html 标签的字体大小）
 只有promise成功了之后的情况下才可以往下进行
 8-1 promise解决了回调地狱--链式调用形式--每次.then就会生成新的promise
 8-2 await 链式调用
+
+9.本地存储:数据刷新不会消失 ，持久化
+vuex:刷新丢失 然后从本地存储Token取值 每次刷新 然后初始化数据给到vuex 以后其他就会在这里面获取数据
+10、跳转首页、
+11.Promise.all 所有的成功了
+12.请求首页的内容
+13.Referer 是什么东西？ 
+不要发送 referrer ，对方服务端就不知道你从哪来的了，姑且认为是你是自己人吧。
+; <img src="http://……" referrerPolicy="no-referrer">
+14 下载dayis 在全局引入import "./utils/dayjs"; 通过过滤显示
+15.下载yarn add lodash -S  可以更快筛选出推荐频道的内容
