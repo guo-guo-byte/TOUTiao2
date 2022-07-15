@@ -14,6 +14,16 @@ const routes = [
     component: () => import("@/views/demo.vue"),
   },
   {
+    path: "/search",
+    component: () => import("@/views/search"),
+  },
+  {
+    path: "/art/:articleId",
+    component: () => import("@/views/article"),
+    // 这里相当于共享的参数 将路由动态参数映射到组件的 props 中，更推荐这种做法
+    props: true,
+  },
+  {
     path: "/",
     component: () => import("@/views/Layout"),
     children: [

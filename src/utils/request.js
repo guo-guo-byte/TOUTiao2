@@ -28,6 +28,9 @@ request.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
+// request.interceptors.response.use();
+// request.get("http://localhost:3000/name").then(() => {
+//   console.log(res);
+// });
 // 响应拦截器
 export default request;

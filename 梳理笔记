@@ -32,4 +32,5 @@ vuex:刷新丢失 然后从本地存储Token取值 每次刷新 然后初始化�
 不要发送 referrer ，对方服务端就不知道你从哪来的了，姑且认为是你是自己人吧。
 ; <img src="http://……" referrerPolicy="no-referrer">
 14 下载dayis 在全局引入import "./utils/dayjs"; 通过过滤显示
-15.下载yarn add lodash -S  可以更快筛选出推荐频道的内容
+15.下载yarn add lodash -S 直接引入就可以 可以更快筛选出推荐频道的内容
+16.搜索页面

@@ -9,6 +9,7 @@
             size="small"
             round
             type="info"
+            to="/search"
             >搜索</van-button
           >
         </template>
@@ -40,7 +41,7 @@
     >
       <!-- <van-cell style="text-align: center" title="编辑频道"></van-cell> -->
       <!-- 给汉堡传值 让汉堡里面的数据显示出来  active相当于导航的索引 把导航索引传递过去和汉堡相匹配-->
-      <channel :userCj="userCj" :active="active" />
+      <channel :userCj="userCj" :active="active" @changeActio="changeActio" />
     </van-popup>
   </div>
 </template>
@@ -49,6 +50,8 @@
 import { getUser } from "@/api/channel.js";
 import Aarticle from "@/views/home/components/article.vue";
 import channel from "@/views/home/components/channel-ea";
+import { getLocal } from "@/utils/storage";
+import { TOUTIAO_CHANNELS } from "@/constanta";
 // import channel from '@/views/home/components/channel'
 export default {
   name: "HomePage",
@@ -70,12 +73,33 @@ export default {
     this.getUser();
   },
   mounted() {},
-  // 1.获取头部导航数据
+  // 1.获取头部导航数据 正确的获取首页频道列表数据
+  // 用户登录情况 || 本地存储没有数据 >> 接口拿数据
+  // 其他情况 >> 获取本地存储数据 就是没有登录的时候添加或者删除在刷新就是之前的增改的内容
   methods: {
     async getUser() {
-      const res = await getUser();
-      console.log(res.data.data.channels);
-      this.userCj = res.data.data.channels;
+      // const res = await getUser();
+      // console.log(res.data.data.channels);
+      // this.userCj = res.data.data.channels;
+      try {
+        // 获取用户token
+        const token = this.$store.state.user?.token;
+        //获取本地错处频道数据
+        let channels = getLocal(TOUTIAO_CHANNELS);
+        if (token || !channels) {
+          const res = await getUser();
+          channels = res.data.data.channels;
+        }
+        this.userCj = channels;
+      } catch (error) {
+        this.$toast("失败");
+      }
+    },
+    changeActio(index, sttus) {
+      // 两个索引相等点击就会一样，点击任何一个另一个就会高亮
+      this.active = index;
+      // 弹层关闭
+      this.showp = sttus;
     },
   },
 };

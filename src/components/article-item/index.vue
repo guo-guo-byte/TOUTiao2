@@ -1,7 +1,7 @@
 <template>
   <!-- 首页图片内容 -->
   <div class="article-item">
-    <van-cell :title="article.title">
+    <van-cell :title="article.title" :to="`/art/${article.art_id}`">
       <!-- 如果是一张图片的话 就直接默认default为右边 -->
       <template #default v-if="article.cover.type === 1">
         <van-image class="img" :src="article.cover.images[0]"></van-image>
